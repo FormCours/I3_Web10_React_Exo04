@@ -15,13 +15,24 @@ const Calculatrice = () => {
     const [operation, setOperation] = useState('choice');
     const [result, setResult] = useState('');
 
+    const handleNumberInput = (e, setStateValue) => {
+        const regexNumber = /^[0-9]+([.,][0-9]*)?$/
+        const value = e.target.value;
+
+        console.log(value);
+
+        if(value === '' || regexNumber.test(value)) {
+            setStateValue(value.replace(',', '.'));
+        }
+    }
+
     return (<>
         <h2>Calculatrice</h2>
         <form>
             <div>
                 <label htmlFor='nb1'>Nb 1 : </label>
                 <input type='text' 
-                    onChange={(e) => setNb1(e.target.value)}
+                    onChange={(e) => handleNumberInput(e, setNb1)}
                     value={nb1} />
             </div>
             <div>
@@ -39,7 +50,7 @@ const Calculatrice = () => {
             <div>
                 <label htmlFor='nb2'>Nb 2 : </label>
                 <input type='text'
-                    onChange={(e) => setNb2(e.target.value)}
+                    onChange={(e) => handleNumberInput(e, setNb2)}
                     value={nb2}/>
             </div>
             <div>
